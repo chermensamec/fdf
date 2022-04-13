@@ -2,5 +2,5 @@
 
 int main()
 {
-	read_map("1.txt");
+	read_map("10-2.fdf");
 }
