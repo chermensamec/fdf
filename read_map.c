@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-char	**add_line(char ***arr, int size)
+void	add_line(char ***arr, int size)
 {
 	int		i;
 	char	**new;
@@ -12,10 +12,9 @@ char	**add_line(char ***arr, int size)
 		new[i] = (*arr)[i];
 		i++;
 	}
-	free(*arr);
+	if (size != 0)
+		free(*arr);
 	*arr = new;
-	return (new);
-
 }
 
 int  read_map(char *file)
@@ -23,23 +22,26 @@ int  read_map(char *file)
 	int		fd;
 	char	*line;
 	char	**res;
+	int 	size;
 	int		i;
 
-	i = -1;
+	size = 0;
 	if (ft_strcmp(file + ft_strlen(file) - 4, ".fdf"))
 		return (0);
 	fd = open(file, O_RDONLY, 0644);
 	line = get_next_line(fd);
 	while (line)
 	{
-		add_line(&res, ++i);
-		res[i] = line;
+		add_line(&res, size);
+		res[size++] = line;
 		line = get_next_line(fd);
 	}
-	while (i > -1)
+	printf("%d\n", size);
+	i = 0;
+	while (i < size)
 	{
 		printf("%s", res[i]);
-		free(res[i--]);
+		free(res[i++]);
 	}
 	free(res);
 	close(fd);
