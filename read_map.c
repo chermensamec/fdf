@@ -36,7 +36,6 @@ int  read_map(char *file)
 		res[size++] = line;
 		line = get_next_line(fd);
 	}
-	printf("%d\n", size);
 	i = 0;
 	while (i < size)
 	{
