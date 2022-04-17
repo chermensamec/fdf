@@ -13,7 +13,7 @@ void	draw_rectangle(t_win *win, int height, int width, int empty)
 			x = 0;
 			while (x != width)
 			{
-				my_mlx_pixel_put(win, x, y, 0x6fff0000);
+				my_mlx_pixel_put(win, x, y, 0xffff0000);
 				x++;	
 			}
 			y++;

@@ -16,6 +16,13 @@ typedef struct	s_win {
 	int		endian;
 }	t_win;
 
+typedef struct s_mouse{
+	int xcur;
+	int ycur;
+	int xprev;
+	int yprev;
+} t_mouse;
+
 int 	read_map(char *file);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*get_next_line(int fd);
@@ -26,6 +33,6 @@ char	*ft_strchr(const char *s, int c);
 int		ft_strlen(const char *s);
 void	my_mlx_pixel_put(t_win *data, int x, int y, int color);
 void	draw_rectangle(t_win *win, int height, int width, int empty);
-t_win	*creat_win(void);
+t_win	*create_win(void);
 void	draw_texture(t_win *win);
 #endif
