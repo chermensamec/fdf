@@ -1,38 +1,34 @@
 #ifndef FDF_H
 # define FDF_H
-#define  BUFFER_SIZE 10
- #include <stdio.h>
- #include <unistd.h>
- #include <stdlib.h>
- #include <fcntl.h>
- #include <mlx.h>
-typedef struct	s_win {
-	void	*mlx;
-	char	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_win;
 
-typedef struct s_mouse{
-	int xcur;
-	int ycur;
-	int xprev;
-	int yprev;
-} t_mouse;
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-int 	read_map(char *file);
-int		ft_strcmp(const char *s1, const char *s2);
+#define MAX(a, b) a > b ? a : b
+#define ABS(a) a < 0 (-1 * a) : a
+
+typedef struct {
+	float	**matrix;
+	int	height;
+	int	width;
+} s_struct;
+
+
+// get next line 
+#define BUFFER_SIZE 1
+char	*get_line(int fd, char *buff, char *remainder);
+char	*ft_get_remaind(char *remainder);
+char	*ft_cut_line(char	*remainder);
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *s);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+int	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
-int		ft_strlen(const char *s);
-void	my_mlx_pixel_put(t_win *data, int x, int y, int color);
-void	draw_rectangle(t_win *win, int height, int width, int empty);
-t_win	*create_win(void);
-void	draw_texture(t_win *win);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char *s1, char *s2);
+// fdf
+void read_file(s_struct *data, char *file);
+char	**ft_split(char const *s, char c);
+int	ft_atoi(const char *nptr);
 #endif
