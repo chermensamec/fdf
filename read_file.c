@@ -66,9 +66,10 @@ void read_file(s_struct *data, char *file)
 	i = 0;
 	data->width = get_width(file);
 	data->height = get_height(file);	
-	data->matrix = (int **) malloc(sizeof(float *) * data->height);
+	data->matrix = (int **) malloc(sizeof(int *) * data->height);
+
 	while (i != data->height)
-		data->matrix[i++] = (int *)malloc(sizeof(float) * data->width); 
+		data->matrix[i++] = (int *)malloc(sizeof(int) * data->width); 
 	filling_matrix(data, file);
 	for (int i = 0; i < data->height; i++)
 	{

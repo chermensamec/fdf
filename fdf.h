@@ -5,14 +5,22 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <mlx.h>
 
-#define MAX(a, b) a > b ? a : b
-#define ABS(a) a < 0 (-1 * a) : a
+#define MAX(a, b) (a > b ? a : b)
+#define ABS(a) ((a < 0) ? -a : a)
 
 typedef struct {
-	float	**matrix;
+	int	**matrix;
 	int	height;
 	int	width;
+	int line_length; 	
+	void	*mlx;
+	char	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		endian;
 } s_struct;
 
 
@@ -28,7 +36,10 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 // fdf
-void read_file(s_struct *data, char *file);
+void	read_file(s_struct *data, char *file);
 char	**ft_split(char const *s, char c);
-int	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
+void	brethenham(s_struct *data, float x1, float y1, float x2, float y2);
+s_struct	*create_win(void);
+void	my_mlx_pixel_put(s_struct *data, float x, float y, int color);
 #endif
