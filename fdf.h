@@ -6,15 +6,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <mlx.h>
+#include <math.h>
 
-#define MAX(a, b) (a > b ? a : b)
-#define ABS(a) ((a < 0) ? -a : a)
+typedef struct
+{
+	int	h;
+	int	c;
+}	dots;
+
 
 typedef struct {
-	int	**matrix;
-	int	height;
-	int	width;
-	int line_length; 	
+	dots	**matrix;
+	int		height;
+	int		width;
+	int 	line_length; 	
 	void	*mlx;
 	char	*mlx_win;
 	void	*img;
@@ -42,4 +47,5 @@ int		ft_atoi(const char *nptr);
 void	brethenham(s_struct *data, float x1, float y1, float x2, float y2);
 s_struct	*create_win(void);
 void	my_mlx_pixel_put(s_struct *data, float x, float y, int color);
+void draw(s_struct *data);
 #endif
