@@ -44,8 +44,12 @@ char	*ft_strjoin(char *s1, char *s2);
 void	read_file(s_struct *data, char *file);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *nptr);
-void	brethenham(s_struct *data, float x1, float y1, float x2, float y2);
+void	brethenham(s_struct *data, float x, float y, float x1, float y1);
 s_struct	*create_win(void);
 void	my_mlx_pixel_put(s_struct *data, float x, float y, int color);
 void draw(s_struct *data);
+int	get_width(char *file);
+int get_height(char *file);
+int get_max(float x, int y);
+int	get_abs(float x);
 #endif

@@ -1,39 +1,5 @@
 #include "fdf.h"
 
-int	get_width(char *file)
-{
-	int fd;
-	char *line;
-	char **split_line;
-	int	i;
-
-	fd = open(file, O_RDONLY);
-	i = 0;
-	line = get_next_line(fd);
-	split_line = ft_split(line, ' ');
-	while(split_line[i++] != 0)
-		;
-	close(fd);	
-	return (i - 1);
-}
-int get_height(char *file)
-{
-	char *line;
-	int	height;
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	height = 0;
-	line = get_next_line(fd);
-	while(line)
-	{
-		line = get_next_line(fd);
-		height++;
-		free(line);
-	}
-	return (height);
-}
-
 int	ft_pow(int num, int pow)
 {
 	int	i;
@@ -114,16 +80,16 @@ void read_file(s_struct *data, char *file)
 		data->matrix[i++] = (dots *)malloc(sizeof(dots) * data->width);
 	
 	filling_matrix(data, file);
-	// for (int i = 0; i < data->height; i++)
-	// {
-	// 	for (int j = 0; j < data->width; j++)
-	// 	{
-	// 		printf("%8d ", data->matrix[i][j].c);
-	// 	}
-	// 	for (int j = 0; j < data->width; j++)
-	// 	{
-	// 		printf("%3d ", data->matrix[i][j].h);
-	// 	}
-	// 	printf("\n");
-	// }	
+	for (int i = 0; i < data->height; i++)
+	{
+		for (int j = 0; j < data->width; j++)
+		{
+			printf("%8d ", data->matrix[i][j].c);
+		}
+		for (int j = 0; j < data->width; j++)
+		{
+			printf("%3d ", data->matrix[i][j].h);
+		}
+		printf("\n");
+	}	
 }
