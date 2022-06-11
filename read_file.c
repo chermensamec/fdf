@@ -80,16 +80,16 @@ void read_file(s_struct *data, char *file)
 		data->matrix[i++] = (dots *)malloc(sizeof(dots) * data->width);
 	
 	filling_matrix(data, file);
-	for (int i = 0; i < data->height; i++)
-	{
-		for (int j = 0; j < data->width; j++)
-		{
-			printf("%8d ", data->matrix[i][j].c);
-		}
-		for (int j = 0; j < data->width; j++)
-		{
-			printf("%3d ", data->matrix[i][j].h);
-		}
-		printf("\n");
-	}	
+	// for (int i = 0; i < data->height; i++)
+	// {
+	// 	for (int j = 0; j < data->width; j++)
+	// 	{
+	// 		printf("%8d ", data->matrix[i][j].c);
+	// 	}
+	// 	for (int j = 0; j < data->width; j++)
+	// 	{
+	// 		printf("%3d ", data->matrix[i][j].h);
+	// 	}
+	// 	printf("\n");
+	// }	
 }
