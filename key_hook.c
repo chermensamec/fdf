@@ -14,11 +14,11 @@ int	key_hook(int keycode, s_struct *data)
 	}
 	else if (keycode == 125)
 	{
-		data->img_properties->y_shift -= 50;
+		data->img_properties->y_shift += 50;
 	}
 	else if (keycode == 126)
 	{
-		data->img_properties->y_shift += 50;
+		data->img_properties->y_shift -= 50;
 	}
 	else if (keycode == 123)
 	{
@@ -27,6 +27,14 @@ int	key_hook(int keycode, s_struct *data)
 	else if (keycode == 124)
 	{
 		data->img_properties->x_shift += 50;
+	}
+	else if (keycode == 69)
+	{
+		data->img_properties->zoom += 5;
+	}
+	else if (keycode == 78)
+	{
+		data->img_properties->zoom -= 5;
 	}
 	//mlx_destroy_image(data->window->mlx,data->window->img);
 	mlx_destroy_image(data->window->mlx, data->window->img);

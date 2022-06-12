@@ -18,7 +18,6 @@ int	main(int argc, char *argv[])
 	mlx_put_image_to_window(data->window->mlx, data->window->mlx_win, data->window->img, 0, 0);
 	// printf("mlx_put_image_to_window %ld", seconds );
 	mlx_key_hook(data->window->mlx_win, key_hook, data);
-
 	mlx_loop(data->window->mlx);
 	return (0);	
 }

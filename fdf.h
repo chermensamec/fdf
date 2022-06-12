@@ -67,4 +67,5 @@ int			get_width(char *file);
 int 		get_height(char *file);
 int 		get_max(float x, int y);
 int			get_abs(float x);
+int mouse(s_struct *win_ptr, int x, int y);
 #endif

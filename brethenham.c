@@ -24,7 +24,7 @@ void	brethenham(s_struct *data, float y, float x, float y1, float x1)
 	y *= data->img_properties->zoom;
 	x1 *= data->img_properties->zoom;
 	y1 *= data->img_properties->zoom;
-
+	// printf("%d %d", x , y);
 	x += data->window->win_width / 2 + data->img_properties->x_shift;
 	y += data->window->win_height / 2+ data->img_properties->y_shift;
 	x1 += data->window->win_width / 2 + data->img_properties->x_shift;
