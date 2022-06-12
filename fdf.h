@@ -25,16 +25,21 @@ typedef struct
 	char	*addr;
 	int		bits_per_pixel;
 	int		endian;
-}s_win;
+} s_win;
 
-
+typedef struct{
+	int	zoom;
+	int	height;
+	int x_shift;
+	int	y_shift;
+} s_img_settings;
 
 typedef struct {
 	dots	**matrix;
 	int		height;
 	int		width;
 	s_win	*window;	
-	
+	s_img_settings	*img_properties;	
 } s_struct;
 
 

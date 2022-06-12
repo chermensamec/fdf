@@ -17,21 +17,19 @@ void	brethenham(s_struct *data, float y, float x, float y1, float x1)
 	int		color;
 
 	color = data->matrix[(int) y][(int) x].c;
-	z[0] = data->matrix[(int) y][(int) x].h;
-	z[1] = data->matrix[(int) y1][(int) x1].h;
+	z[0] = data->matrix[(int) y][(int) x].h * data->img_properties->height;
+	z[1] = data->matrix[(int) y1][(int) x1].h * data->img_properties->height;
 
-	x *= 20;
-	y *= 20;
-	x1 *= 20;
-	y1 *= 20;
+	x *= data->img_properties->zoom;
+	y *= data->img_properties->zoom;
+	x1 *= data->img_properties->zoom;
+	y1 *= data->img_properties->zoom;
 
+	x += data->window->win_width / 2 + data->img_properties->x_shift;
+	y += data->window->win_height / 2+ data->img_properties->y_shift;
+	x1 += data->window->win_width / 2 + data->img_properties->x_shift;
+	y1 += data->window->win_height / 2 + data->img_properties->y_shift;
 
-	x += data->window->win_width / 2;
-	y += data->window->win_height / 1.5;
-	x1 += data->window->win_width / 2;
-	y1 += data->window->win_height / 1.5;
-
-	
 	isometric(&x, &y, z[0]);
 	isometric(&x1, &y1, z[1]);
 
