@@ -7,11 +7,15 @@
 #include <stdio.h>
 #include <mlx.h>
 #include <math.h>
+#include <time.h>
+#include <time.h>
+
+
 
 typedef struct
 {
-	int	h;
-	int	c;
+	int		h;
+	int		c;
 }	dots;
 
 typedef struct 
@@ -32,6 +36,7 @@ typedef struct{
 	int	height;
 	int x_shift;
 	int	y_shift;
+	float	alpha;
 } s_img_settings;
 
 typedef struct {
@@ -44,10 +49,7 @@ typedef struct {
 
 
 // get next line 
-#define BUFFER_SIZE 1
-char	*get_line(int fd, char *buff, char *remainder);
-char	*ft_get_remaind(char *remainder);
-char	*ft_cut_line(char	*remainder);
+#define BUFFER_SIZE 42
 char	*get_next_line(int fd);
 int	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
@@ -63,9 +65,10 @@ void		brethenham(s_struct *data, float x, float y, float x1, float y1);
 s_struct	*create_win(void);
 void		my_mlx_pixel_put(s_struct *data, int x, int y, int color);
 void		draw(s_struct *data);
-int			get_width(char *file);
-int 		get_height(char *file);
+void		get_width(char *file, s_struct  *data);
 int 		get_max(float x, int y);
 int			get_abs(float x);
-int mouse(s_struct *win_ptr, int x, int y);
+int			mouse(s_struct *win_ptr, int x, int y);
+int	word_count(char	*str, char delimetr);
+int	index_elem(const char *s, int c);
 #endif

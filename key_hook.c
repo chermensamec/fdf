@@ -36,8 +36,17 @@ int	key_hook(int keycode, s_struct *data)
 	{
 		data->img_properties->zoom -= 5;
 	}
+	else if (keycode == 43)
+	{
+		data->img_properties->alpha += 0.1;
+	}
+	else if (keycode == 47)
+	{
+		data->img_properties->alpha -= 0.1;
+	}
 	//mlx_destroy_image(data->window->mlx,data->window->img);
-	mlx_destroy_image(data->window->mlx, data->window->img);
+	free(data->window->img);
+	free(data->window->addr);
 	data->window->img = mlx_new_image(data->window->mlx, data->window->win_height, data->window->win_width);
 	data->window->addr = mlx_get_data_addr(data->window->img, &data->window->bits_per_pixel, &data->window->line_length,
 								&data->window->endian);

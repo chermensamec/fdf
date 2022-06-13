@@ -19,10 +19,11 @@ int	get_color(char	*color)
 	int	pow;
 	int	num;
 
-	pow = 1;
 	ans = 0;
-	i = ft_strlen(color + 2);
-	while (color[i - 3])
+
+	i = ft_strlen(color + 3);
+	pow = 0;
+	while (color[i])
 	{
 		if(color[i] >= '0' && color[i] <= '9')
 			num = color[i] - '0';
@@ -42,30 +43,30 @@ void filling_matrix(s_struct *data, char *file)
 	int		fd;
 	char	*line;
 	char	**split_line;
-	char	**split_line_dot;
 	int 	i;
 	int		j;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
+	clock_t begin = clock();
 	while (line)
 	{
 		split_line = ft_split(line, ' ');
 		j = 0;
 		while (split_line[j])
 		{
-			split_line_dot = ft_split(split_line[j], ',');
-			data->matrix[i][j].h = ft_atoi(split_line_dot[0]);
-			if (split_line_dot[1] == 0)
-				data->matrix[i][j].c = 0xFFFFFF;
-			else
-				data->matrix[i][j].c = get_color(split_line_dot[1]);
+			data->matrix[i][j].h = ft_atoi(split_line[j]);
+			// data->matrix[i][j].c = 0xFFFFFF;
+			if ( index_elem(split_line[j],',') != 0)
+				data->matrix[i][j].c = get_color(split_line[j] + index_elem(split_line[j],','));
 			j++;
 		}
 		i++;
 		line = get_next_line(fd);
 	}
+	clock_t end = clock();
+	printf("get matrix %f", (double)(end - begin) / CLOCKS_PER_SEC);
 	close(fd);
 }
 void read_file(s_struct *data, char *file)
@@ -73,27 +74,13 @@ void read_file(s_struct *data, char *file)
 	int i;
 
 	i = 0;
-	data->width = get_width(file);
-	data->height = get_height(file);	
+	get_width(file, data);
 	data->matrix = (dots **) malloc(sizeof(dots *) * data->height);
 	while (i != data->height)
 		data->matrix[i++] = (dots *)malloc(sizeof(dots) * data->width);
-	
+	if (data->height > data->width)
+		data->img_properties->zoom = 700 / data->height;
+	else
+		data->img_properties->zoom = 700 /  data->width;
 	filling_matrix(data, file);
-	for (int i = 0; i < data->height; i++)
-	{
-		for (int j = 0; j < data->width; j++)
-		{
-			printf("%8d ", data->matrix[i][j].c);
-		}
-		printf("\n");
-	}
-	for (int i = 0; i < data->height; i++)
-	{
-		for (int j = 0; j < data->width; j++)
-		{
-			printf("%3d ", data->matrix[i][j].h);
-		}
-		printf("\n");
-	}
 }

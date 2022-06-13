@@ -3,104 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onelda <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: onelda <onelda@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:03:01 by onelda            #+#    #+#             */
-/*   Updated: 2022/06/04 17:55:12 by onelda           ###   ########.fr       */
+/*   Updated: 2022/06/13 21:11:26 by onelda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_numstr(const char *str, char c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int	f;
+	char	*substr;
+	size_t	i;
 
 	i = 0;
-	f = 0;
-	while (*str)
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	substr = malloc((len + 1) * sizeof(char));
+	if (!substr)
+		return (NULL);
+	while (i < len)
 	{
-		if (*str != c && f == 0)
-		{
-			f = 1;
-			i++;
-		}
-		else if (*str == c)
-			f = 0;
-		str++;
+		substr[i] = s[start + i];
+		i++;
 	}
-	return (i);
+	substr[i] = '\0';
+	return (substr);
 }
 
-char	*ft_getstr(char const *s, int start, int end)
+static size_t	ft_number_of_words(const char *str, char c)
 {
-	char	*res;
-	int		i;
+	size_t			i;
+	size_t			res;
 
 	i = 0;
-	res = malloc(sizeof(char) * (end - start + 1));
-	if (!res)
-		return (0);
-	while (start < end)
+	res = 0;
+	while (str[i])
 	{
-		res[i] = s[start];
+		if ((str[i] != c && str[i + 1] == c)
+			|| (str[i] != c && !str[i + 1]))
+			res++;
 		i++;
-		start++;
 	}
-	res[i] = '\0';
 	return (res);
 }
 
-char	**ft_free(char **res, int n)
+static size_t	ft_strlen_until_c(const char *str, char c)
 {
-	int	i;
+	size_t			res;
 
-	i = 0;
-	while (i != n)
-	{
-		free(res[i]);
-		i++;
-	}
-	free(res);
-	return (0);
+	res = 0;
+	while (str[res] && str[res] != c)
+		res++;
+	return (res);
 }
 
-int	ft_help(char ***res, char const *s, char c)
+static char	**ft_clear(char **res)
 {
-	if (!s)
-		return (0);
-	*res = malloc(sizeof(char *) * (ft_numstr(s, c) + 1));
-	if (!*res)
-		return (0);
-	return (1);
-}	
+	unsigned int	i;
+
+	i = 0;
+	while (res[i])
+		free(res[i++]);
+	free(res);
+	return (NULL);
+}
 
 char	**ft_split(char const *s, char c)
 {
-	int		end;
-	int		start;	
-	int		i;
-	char	**res;
+	size_t			i;
+	size_t			b;
+	char			**res;
 
-	end = 0;
-	start = -1;
 	i = 0;
-	if (!ft_help(&res, s, c))
-		return (0);
-	while (end <= ft_strlen(s))
+	b = 0;
+	res = malloc((ft_number_of_words(s, c) + 1) * sizeof(char *));
+	if (!s || !res)
+		return (NULL);
+	while (s[i++] == c)
+		b++;
+	i = -1;
+	while (++i < ft_number_of_words(s, c))
 	{
-		if (s[end] != c && start < 0)
-			start = end;
-		else if ((s[end] == c || end == ft_strlen(s)) && start >= 0)
-		{	
-			res[i] = ft_getstr(s, start, end);
-			if (!res[i++])
-				return (ft_free(res, i - 1));
-			start = -1;
-		}
-		end++;
+		res[i] = ft_substr(s, b, ft_strlen_until_c(&s[b], c));
+		if (!res)
+			return (ft_clear(res));
+		b += ft_strlen_until_c(&s[b], c);
+		while (s[b] == c)
+			b++;
 	}
-	res[i] = 0;
+	res[i] = NULL;
 	return (res);
 }

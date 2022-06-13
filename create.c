@@ -17,5 +17,6 @@ s_struct *create_win(void)
 	data->img_properties->height = 1; 
 	data->img_properties->x_shift = 0;
 	data->img_properties->y_shift = 0;
+	data->img_properties->alpha = 0.8;
 	return (data);
 }
