@@ -2,8 +2,7 @@
 
 void	isometric(float *x, float *y, int z, float alpha)
 {
-	// *x = *x * cos(0.8) - *y * sin(0.8);
-	// *y = *x * sin(0.8) + *y * cos(0.8) - z;
+	
 	*x = (*x - *y) * cos(alpha);
 	*y = (*x + *y) * sin(alpha) - z;
 }
@@ -33,10 +32,11 @@ void	brethenham(s_struct *data, float y, float x, float y1, float x1)
 	y *= data->img_properties->zoom;
 	x1 *= data->img_properties->zoom;
 	y1 *= data->img_properties->zoom;
-
-	isometric(&x, &y, z[0], data->img_properties->alpha);
-	isometric(&x1, &y1, z[1], data->img_properties->alpha);
-
+	if (data->img_properties->view == 3)
+	{
+		isometric(&x, &y, z[0], data->img_properties->alpha);
+		isometric(&x1, &y1, z[1], data->img_properties->alpha);
+	}
 	x += data->window->win_width /1.2 + data->img_properties->x_shift;
 	y += data->window->win_height / 4+ data->img_properties->y_shift;
 	x1 += data->window->win_width /1.2 + data->img_properties->x_shift;

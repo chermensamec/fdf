@@ -37,6 +37,8 @@ typedef struct{
 	int x_shift;
 	int	y_shift;
 	float	alpha;
+	int		view;
+	int		color;
 } s_img_settings;
 
 typedef struct {
@@ -44,7 +46,7 @@ typedef struct {
 	int		height;
 	int		width;
 	s_win	*window;	
-	s_img_settings	*img_properties;	
+	s_img_settings	*img_properties;
 } s_struct;
 
 
@@ -57,7 +59,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 // fdf
-int	key_hook(int keycode, s_struct *vars);
+int			key_hook(int keycode, s_struct *vars);
 void		read_file(s_struct *data, char *file);
 char		**ft_split(char const *s, char c);
 int			ft_atoi(const char *nptr);
@@ -69,6 +71,8 @@ void		get_width(char *file, s_struct  *data);
 int 		get_max(float x, int y);
 int			get_abs(float x);
 int			mouse(s_struct *win_ptr, int x, int y);
-int	word_count(char	*str, char delimetr);
-int	index_elem(const char *s, int c);
+int			word_count(char	*str, char delimetr);
+int			index_elem(const char *s, int c);
+void		destroy_win(s_struct *data);
+
 #endif

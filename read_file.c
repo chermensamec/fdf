@@ -20,10 +20,9 @@ int	get_color(char	*color)
 	int	num;
 
 	ans = 0;
-
-	i = ft_strlen(color + 3);
 	pow = 0;
-	while (color[i])
+	i = ft_strlen(color) - 1;
+	while (i != 2)
 	{
 		if(color[i] >= '0' && color[i] <= '9')
 			num = color[i] - '0';
@@ -57,11 +56,15 @@ void filling_matrix(s_struct *data, char *file)
 		while (split_line[j])
 		{
 			data->matrix[i][j].h = ft_atoi(split_line[j]);
-			// data->matrix[i][j].c = 0xFFFFFF;
-			if ( index_elem(split_line[j],',') != 0)
+			if (index_elem(split_line[j],',') != 0)
 				data->matrix[i][j].c = get_color(split_line[j] + index_elem(split_line[j],','));
+			else
+				data->matrix[i][j].c = 0xFFFFFF;
 			j++;
+			//free(split_line[j]);
 		}
+		//free(split_line);
+		//free(line);
 		i++;
 		line = get_next_line(fd);
 	}

@@ -18,5 +18,7 @@ s_struct *create_win(void)
 	data->img_properties->x_shift = 0;
 	data->img_properties->y_shift = 0;
 	data->img_properties->alpha = 0.8;
+	data->img_properties->view = 3;
+	data->img_properties->color = 1;
 	return (data);
 }

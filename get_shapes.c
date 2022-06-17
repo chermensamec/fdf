@@ -20,17 +20,4 @@ void	get_width(char *file, s_struct *data)
 	}
 	close(fd);
 	data->height = height;
-
 }
-// int get_height(char *file)
-// {
-// 	char *line;
-// 	int	height;
-// 	int	fd;
-
-// 	fd = open(file, O_RDONLY);
-// 	height = 0;
-// 	line = get_next_line(fd);
-	
-// 	return (height);
-// }
