@@ -4,7 +4,6 @@
 int	main(int argc, char *argv[])
 {
 	s_struct *data;
-
 	data = create_win();
 	read_file(data, argv[1]);
 	if (data->height > data->width)
